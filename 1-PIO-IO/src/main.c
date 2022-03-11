@@ -43,13 +43,13 @@
 
 
 #define BUT_PIO1			PIOD
-#define BUT_PIO1_ID		ID_PIOD
+#define BUT_PIO1_ID			ID_PIOD
 #define BUT_PIO1_IDX		28
-#define BUT_PIO1_IDX_MASK (1u << BUT_PIO1_IDX)
+#define BUT_PIO1_IDX_MASK   (1u << BUT_PIO1_IDX)
 
 // OLED2
 
-#define OLED2_PIO		PIOC
+#define OLED2_PIO		PIOC  
 #define OLED2_PIO_ID	ID_PIOC
 #define OLED2_PIO_IDX	30
 #define OLED2_PIO_IDX_MASK (1<<OLED2_PIO_IDX)
