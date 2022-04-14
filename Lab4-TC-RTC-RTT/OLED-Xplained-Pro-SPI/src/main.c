@@ -102,7 +102,7 @@ void RTC_Handler(void) {
 	
 	/* Time or date alarm */
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-		// o código para irq de alame vem aqui
+		// o cï¿½digo para irq de alame vem aqui
 		flag_rtc_alarm = 1;
 	}
 
@@ -137,8 +137,8 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type) {
 
 void TC0_Handler(void) {
 	/**
-	* Devemos indicar ao TC que a interrupção foi satisfeita.
-	* Isso é realizado pela leitura do status do periférico
+	* Devemos indicar ao TC que a interrupï¿½ï¿½o foi satisfeita.
+	* Isso ï¿½ realizado pela leitura do status do perifï¿½rico
 	**/
 	volatile uint32_t status = tc_get_status(TC0, 0);
 
@@ -148,8 +148,8 @@ void TC0_Handler(void) {
 
 void TC1_Handler(void) {
 	/**
-	* Devemos indicar ao TC que a interrupção foi satisfeita.
-	* Isso é realizado pela leitura do status do periférico
+	* Devemos indicar ao TC que a interrupï¿½ï¿½o foi satisfeita.
+	* Isso ï¿½ realizado pela leitura do status do perifï¿½rico
 	**/
 	volatile uint32_t status = tc_get_status(TC0, 1);
 
@@ -185,12 +185,12 @@ static float get_time_rtt(){
 /** 
  * Configura RTT
  *
- * arg0 pllPreScale  : Frequência na qual o contador irá incrementar
+ * arg0 pllPreScale  : Frequï¿½ncia na qual o contador irï¿½ incrementar
  * arg1 IrqNPulses   : Valor do alarme 
  * arg2 rttIRQSource : Pode ser uma 
  *     - 0: 
- *     - RTT_MR_RTTINCIEN: Interrupção por incremento (pllPreScale)
- *     - RTT_MR_ALMIEN : Interrupção por alarme
+ *     - RTT_MR_RTTINCIEN: Interrupï¿½ï¿½o por incremento (pllPreScale)
+ *     - RTT_MR_ALMIEN : Interrupï¿½ï¿½o por alarme
  */
 static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
 
@@ -228,7 +228,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	/* Configura o PMC */
 	pmc_enable_periph_clk(ID_TC);
 
-	/** Configura o TC para operar em  freq hz e interrupçcão no RC compare */
+	/** Configura o TC para operar em  freq hz e interrupï¿½cï¿½o no RC compare */
 	tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
 	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
 	tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
@@ -266,7 +266,7 @@ void but_callback_1(void){
 
 
 /************************/
-/* funções                                                              */
+/* funï¿½ï¿½es                                                              */
 /************************/
 
 void io_init(void)
@@ -285,12 +285,12 @@ void io_init(void)
 	pmc_enable_periph_clk(OLED_PIO_ID_3);
 	pio_configure(OLED_PIO_3, PIO_OUTPUT_0, OLED_PIO_IDX_MASK_3, PIO_DEFAULT);
 	
-	// Inicializa clock do periférico PIO responsavel pelo botao
+	// Inicializa clock do perifï¿½rico PIO responsavel pelo botao
 	pmc_enable_periph_clk(BUT_PIO_ID);
 	pmc_enable_periph_clk(BUT_PIO_ID_1);
 
 
-	// Configura PIO para lidar com o pino do botão como entrada
+	// Configura PIO para lidar com o pino do botï¿½o como entrada
 	// com pull-up
 	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_IDX_MASK, PIO_PULLUP | PIO_DEBOUNCE);
 	pio_set_debounce_filter(BUT_PIO, BUT_PIO_IDX_MASK, 60);
@@ -300,9 +300,9 @@ void io_init(void)
 	
 
 
-	// Configura interrupção no pino referente ao botao e associa
-	// função de callback caso uma interrupção for gerada
-	// a função de callback é a: but_callback()
+	// Configura interrupï¿½ï¿½o no pino referente ao botao e associa
+	// funï¿½ï¿½o de callback caso uma interrupï¿½ï¿½o for gerada
+	// a funï¿½ï¿½o de callback ï¿½ a: but_callback()
 	
 	pio_handler_set(BUT_PIO_1,
 	BUT_PIO_ID_1,
@@ -310,7 +310,7 @@ void io_init(void)
 	PIO_IT_RISE_EDGE,
 	but_callback_1);
 	
-	// Ativa interrupção e limpa primeira IRQ gerada na ativacao
+	// Ativa interrupï¿½ï¿½o e limpa primeira IRQ gerada na ativacao
 	
 	pio_enable_interrupt(BUT_PIO, BUT_PIO_IDX_MASK);
 	pio_get_interrupt_status(BUT_PIO);
@@ -320,7 +320,7 @@ void io_init(void)
 	
 		
 	// Configura NVIC para receber interrupcoes do PIO do botao
-	// com prioridade 4 (quanto mais próximo de 0 maior)
+	// com prioridade 4 (quanto mais prï¿½ximo de 0 maior)
 	
 	NVIC_EnableIRQ(BUT_PIO_ID);
 	NVIC_SetPriority(BUT_PIO_ID, 4);
